@@ -48,6 +48,42 @@ struct TestCollatz : CppUnit::TestFixture {
         CPPUNIT_ASSERT(i == 1);
         CPPUNIT_ASSERT(j == 10);}
 
+	void test_read_1 () {
+		std::istringstream r("\n");
+		int i;
+		int j;
+		const bool b = collatz_read(r, i, j);
+		CPPUNIT_ASSERT(b == false);
+	}
+
+	void test_read_2 () {
+		std::istringstream r("1 10\n");
+		int i;
+		int j;
+		const bool b1 = collatz_read(r, i, j);
+		CPPUNIT_ASSERT(b1 == true);
+		CPPUNIT_ASSERT(i == 1);
+		CPPUNIT_ASSERT(j == 10);
+		const bool b2 = collatz_read(r, i ,j);
+		CPPUNIT_ASSERT(b2 == false);
+	}
+
+	void test_read_3 () {
+		std::istringstream r("1 10\n100 200");
+		int i;
+		int j;
+		const bool b1 = collatz_read(r, i, j);
+		CPPUNIT_ASSERT(b1 == true);
+		CPPUNIT_ASSERT(i == 1);
+		CPPUNIT_ASSERT(j == 10);
+		const bool b2 = collatz_read(r, i ,j);
+		CPPUNIT_ASSERT(b2 == true);
+		CPPUNIT_ASSERT(i == 100);
+		CPPUNIT_ASSERT(j == 200);
+		const bool b3 = collatz_read(r, i, j);
+		CPPUNIT_ASSERT(b3 == false);
+	}
+
     // ----
     // eval
     // ----
@@ -67,6 +103,21 @@ struct TestCollatz : CppUnit::TestFixture {
     void test_eval_4 () {
         const int v = collatz_eval(900, 1000);
         CPPUNIT_ASSERT(v == 174);}
+
+	void test_eval_5 () {
+		const int v = collatz_eval(1, 1);
+		CPPUNIT_ASSERT(v == 1);
+	}
+
+	void test_eval_6 () {
+		const int v = collatz_eval(1000000, 1000000);
+		CPPUNIT_ASSERT(v == 153);
+	}
+
+	void test_eval_7 () {
+		const int v = collatz_eval(2, 5);
+		CPPUNIT_ASSERT(v == 8)
+	}
 
     // -----
     // print
@@ -93,10 +144,16 @@ struct TestCollatz : CppUnit::TestFixture {
 
     CPPUNIT_TEST_SUITE(TestCollatz);
     CPPUNIT_TEST(test_read);
+    CPPUNIT_TEST(test_read_1);
+    CPPUNIT_TEST(test_read_2);
+    CPPUNIT_TEST(test_read_3);
     CPPUNIT_TEST(test_eval_1);
     CPPUNIT_TEST(test_eval_2);
     CPPUNIT_TEST(test_eval_3);
     CPPUNIT_TEST(test_eval_4);
+    CPPUNIT_TEST(test_eval_5);
+    CPPUNIT_TEST(test_eval_6);
+    CPPUNIT_TEST(test_eval_7);
     CPPUNIT_TEST(test_print);
     CPPUNIT_TEST(test_solve);
     CPPUNIT_TEST_SUITE_END();};
