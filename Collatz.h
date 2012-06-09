@@ -43,8 +43,28 @@ bool collatz_read (std::istream& r, int& i, int& j) {
 int collatz_eval (int i, int j) {
     assert(i > 0);
     assert(j > 0);
+
     // <your code>
-    int v = 1;
+	int v = 1;
+	int cycle_length = 1;
+	while (i < j) {
+		int num = i;
+		while (num != 1) {
+			if (num % 2 == 0) {
+				num = num / 2;
+				++ cycle_length;
+			}
+			else {
+				num = (3 * num + 1) / 2;
+				cycle_length += 2;
+			}
+		}
+		if (cycle_length > v) {
+			v = cycle_length
+		}
+		cycle_length = 1;
+	}
+
     assert(v > 0);
     return v;}
 
