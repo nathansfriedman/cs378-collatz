@@ -63,6 +63,7 @@ int collatz_eval (int i, int j) {
 			v = cycle_length;
 		}
 		cycle_length = 1;
+		++i;
 	}
 
     assert(v > 0);
