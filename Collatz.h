@@ -60,7 +60,7 @@ int collatz_eval (int i, int j) {
 			}
 		}
 		if (cycle_length > v) {
-			v = cycle_length
+			v = cycle_length;
 		}
 		cycle_length = 1;
 	}

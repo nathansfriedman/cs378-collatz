@@ -116,7 +116,7 @@ struct TestCollatz : CppUnit::TestFixture {
 
 	void test_eval_7 () {
 		const int v = collatz_eval(2, 5);
-		CPPUNIT_ASSERT(v == 8)
+		CPPUNIT_ASSERT(v == 8);
 	}
 
     // -----
