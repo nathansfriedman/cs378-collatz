@@ -47,7 +47,7 @@ int collatz_eval (int i, int j) {
     // <your code>
 	int v = 1;
 	int cycle_length = 1;
-	while (i < j) {
+	while (i <= j) {
 		int num = i;
 		while (num != 1) {
 			if (num % 2 == 0) {
