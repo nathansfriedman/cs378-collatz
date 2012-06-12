@@ -7,8 +7,9 @@ CS Username: nsf
 GitHub ID: nathansfriedman
 GitHub Repository Name: cs378-collatz
 Estimated number of hours: 15
-Actual number of hours:
-Comments:
+Actual number of hours: 20
+Comments: Was able to get submissions to both Sphere tests accepted.
+Turning in project1 one day late.
 
 I attest that I have written every line of code that I have submitted
 and I take full responsibility for the origin of all the code submitted.
