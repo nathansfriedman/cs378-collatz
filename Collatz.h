@@ -11,6 +11,8 @@
 #include <cassert> // assert
 #include <iostream> // endl, istream, ostream
 
+int cache[10000];
+
 // ------------
 // collatz_read
 // ------------
@@ -48,16 +50,23 @@ int collatz_eval (int i, int j) {
 	int v = 1;
 	int cycle_length = 1;
 	while (i <= j) {
-		int num = i;
+		unsigned int num = i;
 		while (num != 1) {
-			if (num % 2 == 0) {
+			if (num <= 10000 && cache[num-1] != 0) {
+				cycle_length = cycle_length + cache[num-1] - 1;
+				num = 1;
+			}
+			else if (num % 2 == 0) {
 				num = num / 2;
-				++ cycle_length;
+				++cycle_length;
 			}
 			else {
 				num = (3 * num + 1) / 2;
 				cycle_length += 2;
 			}
+		}
+		if (i <= 10000) {
+			cache[i-1] = cycle_length;
 		}
 		if (cycle_length > v) {
 			v = cycle_length;
@@ -68,6 +77,22 @@ int collatz_eval (int i, int j) {
 
     assert(v > 0);
     return v;}
+
+// -------------
+// collatz_cache
+// -------------
+
+/**
+* fill the cache
+*/
+void collatz_cache () {
+	for (int c = 0; c < 10000; ++c) {
+		cache[c] = 0;
+	}
+//	for (int c = 0; c < 10000; ++c) {
+//		cache[c] = collatz_eval(c+1, c+1);
+//	}
+}
 
 // -------------
 // collatz_print
@@ -96,6 +121,7 @@ void collatz_print (std::ostream& w, int i, int j, int v) {
 * @param w a std::ostream
 */
 void collatz_solve (std::istream& r, std::ostream& w) {
+	collatz_cache();
     int i;
     int j;
     while (collatz_read(r, i, j)) {
