@@ -47,6 +47,11 @@ int collatz_eval (int i, int j) {
     assert(j > 0);
 
     // <your code>
+	if (j < i) {
+		int temp = j;
+		j = i;
+		i = temp;
+	}
 	int v = 1;
 	int cycle_length = 1;
 	while (i <= j) {
@@ -89,9 +94,6 @@ void collatz_cache () {
 	for (int c = 0; c < 10000; ++c) {
 		cache[c] = 0;
 	}
-//	for (int c = 0; c < 10000; ++c) {
-//		cache[c] = collatz_eval(c+1, c+1);
-//	}
 }
 
 // -------------
